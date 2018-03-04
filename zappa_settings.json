@@ -1,0 +1,14 @@
+{
+    "production": {
+        "app_function": "boot.app",
+        "aws_region": "us-west-2",
+        "profile_name": "rebble",
+        "project_name": "rebble-boot",
+        "runtime": "python3.6",
+        "s3_bucket": "rebble-zappa",
+        "route53_enabled": false,
+        "memory_size": 128,
+        "domain": "boot.rebble.io",
+        "certificate_arn": "arn:aws:acm:us-east-1:032833028620:certificate/c0f1628b-7106-4bcb-a439-951619a732b9"
+    }
+}
