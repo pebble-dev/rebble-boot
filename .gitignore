@@ -1,1 +1,3 @@
-.pyenv
+.pyenv/
+.idea/
+__pycache__/
