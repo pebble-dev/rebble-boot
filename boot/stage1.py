@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 import requests
+from .settings import config
 
 UPSTREAM_BOOT = 'https://boot.getpebble.com/api/config'
-CLOUDPEBBLE_WS_PROXY = 'wss://ws-proxy.cloudpebble.rebble.io/device'
+CLOUDPEBBLE_WS_PROXY = f"wss://ws-proxy.cloudpebble.{config['DOMAIN_ROOT']}/device"
 
 boot_api = Blueprint('boot_api', __name__)
 
