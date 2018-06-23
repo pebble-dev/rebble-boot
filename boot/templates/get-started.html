@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>Here we go!</h2>
+    {%  if os in ('ios', 'android') %}
+        <p>
+            You're ready to Rebble, {{ name }}! To continue, make sure you have this page open on the device
+            on which you use the official Pebble app.
+        </p>
+        <p>
+            Once you tap the button, the Pebble {{ os_display }} app will launch.
+            {% if os == 'android' %}
+                We'll see you back in the app!
+            {% else %}
+                In order to continue setting up Rebble, once the Pebble app launches you will need to
+                first <strong>wait a few seconds</strong>. Then tap the yellow exclamation mark in the top left corner
+                and tap "log in". We'll see you there!
+            {% endif %}
+        </p>
+        <p><a class="button" href="{{ link }}">Switch to Rebble</a></p>
+    {% else %}
+        <p>In order to continue, please head to <strong>{{ base }}</strong> on your phone.</p>
+    {% endif %}
+{% endblock %}

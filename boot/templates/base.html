@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Rebble</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="icon" type="image/x-icon" href="//rebble.io/images/favicon.ico">
+        <link rel="stylesheet" href="//rebble.io/css/common.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto:500');
+            header {
+                padding: 3rem 2em 8em;
+                margin-bottom: calc(-10em + 3rem);
+            }
+            .button {
+                height: 30px;
+                max-width: 300px;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 20px;
+                padding: 10px;
+                display: block;
+            }
+            .button:last-of-type {
+                margin-bottom: 0;
+            }
+            a.button {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                text-transform: uppercase;
+                background-color: #383a3c;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <i class="rebble-logo-light large-icon"></i>
+            <span class="headertext">
+                <span class="sitename">Rebble</span>
+                <span class="separator">·</span>
+                <span class="pagename">Boot</span>
+            </span>
+            <i class="rebble-logo-spacer large-icon"></i>
+        </header>
+        <section>
+            {% block body %}{% endblock %}
+        </section>
+    </body>
+    <footer>
+        <div class="text-content">
+            <p>Made by awesome people</p>
+        </div>
+    </footer>
+</html>

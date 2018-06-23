@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>Welcome to Rebble</h2>
+    <p>
+        You made it{% if name %}, {{ name }}{% endif %}! You're now ready for Rebble. To finish up, just tap
+        the button below.
+    </p>
+    <p><a href="{{ link }}" class="button">It's Rebble Time!</a></p>
+{% endblock %}
