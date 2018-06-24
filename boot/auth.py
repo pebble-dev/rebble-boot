@@ -29,11 +29,11 @@ def validate_state():
 
 rebble = oauth.remote_app(
     'rebble',
-    base_url=f'{config["REBBLE_AUTH"]}/api/v1/',
+    base_url=f'{config["REBBLE_AUTH_URL"]}/api/v1/',
     request_token_url=None,
     access_token_method='POST',
-    access_token_url=f'{config["REBBLE_AUTH"]}/oauth/token',
-    authorize_url=f'{config["REBBLE_AUTH"]}/oauth/authorise',
+    access_token_url=f'{config["REBBLE_AUTH_URL"]}/oauth/token',
+    authorize_url=f'{config["REBBLE_AUTH_URL"]}/oauth/authorise',
     request_token_params={'scope': 'pebble_token pebble profile', 'state': get_state},
     app_key='AUTH_REBBLE',
 )
