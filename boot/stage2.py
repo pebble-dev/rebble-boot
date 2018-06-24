@@ -76,7 +76,7 @@ def generate_boot(platform):
                 # "resources": "https://dev-portal.getpebble.com/api?platform=ios&jsv=28",
                 # "trending_searches": "https://pebble-trending-searches.s3-us-west-2.amazonaws.com/production/data.json?hardware=$$hardware$$&platform=ios",
                 "users/app_locker": f"https://dev-portal.getpebble.com/api/users/locker?platform={platform}&jsv=28",
-                "users/me": f"https://dev-portal.getpebble.com/api/users/me?platform={platform}&jsv=28"
+                "users/me": f"{config['APPSTORE_API_URL']}/api/v0/me?platform={platform}"
             },
             "locker": {
                 "add_endpoint": "https://appstore-api.getpebble.com/v2/locker/$$app_uuid$$",

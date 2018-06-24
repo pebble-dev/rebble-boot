@@ -21,7 +21,7 @@ def index():
         return redirect(url_for('auth.auth_start'))
     stuff = rebble.get('me/pebble/auth')
     if stuff.status != 200:
-        return render_template('need-pebble.html')
+        return render_template('need-pebble.html', auth=app.config['REBBLE_AUTH_URL'])
 
     platform = request.user_agent.platform
 
