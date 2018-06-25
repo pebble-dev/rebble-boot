@@ -29,7 +29,7 @@ def generate_boot(platform):
             "authentication": {
                 "debug_access_token_cookie": {
                     "domain": f".{config['DOMAIN_ROOT']}",
-                    "secure": False,
+                    "secure": True,
                 },
                 "method": "oauth2",
                 "refresh_token": f"{config['REBBLE_AUTH_URL']}/oauth/token",
@@ -76,7 +76,7 @@ def generate_boot(platform):
                 # "resources": "https://dev-portal.getpebble.com/api?platform=ios&jsv=28",
                 # "trending_searches": "https://pebble-trending-searches.s3-us-west-2.amazonaws.com/production/data.json?hardware=$$hardware$$&platform=ios",
                 "users/app_locker": f"https://dev-portal.getpebble.com/api/users/locker?platform={platform}&jsv=28",
-                "users/me": f"{config['APPSTORE_API_URL']}/api/v0/me?platform={platform}"
+                "users/me": f"{config['APPSTORE_API_URL']}/api/v0/users/me?platform={platform}"
             },
             "locker": {
                 "add_endpoint": "https://appstore-api.getpebble.com/v2/locker/$$app_uuid$$",
@@ -184,14 +184,14 @@ def generate_boot(platform):
                 "url": "https://api.weather.com/v2/geocode/$$latitude$$/$$longitude$$/aggregate.json?apiKey=bbf04402eb962506451832d6a828b4d0&products=conditions,fcstdaily7&language=$$language$$&units=$$units$$"
             },
             "webviews": {
-                "appstore/application": f"https://{appstore}/{locale}/application/$$id$$?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/application_changelog": f"https://{appstore}/{locale}/changelog/$$id$$?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/application_share": f"https://{appstore}/applications/$$id$$",
-                "appstore/developer_apps": f"https://{appstore}/{locale}/developer/$$id$$?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/search": f"https://{appstore}/{locale}/search?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/search/query": f"{appstore}/{locale}/search/$$search_type$$?native=true&query=$$query$$&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/watchapps": f"{appstore}/{locale}/watchapps?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/watchfaces": f"{appstore}/{locale}/watchfaces?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/application": f"{appstore}/{locale}/application/$$id$$?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/application_changelog": f"{appstore}/{locale}/changelog/$$id$$?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/application_share": f"{appstore}/applications/$$id$$",
+                "appstore/developer_apps": f"{appstore}/{locale}/developer/$$id$$?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/search": f"{appstore}/{locale}/search?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/search/query": f"{appstore}/{locale}/search/$$search_type$$?access_token={access_token}&native=true&query=$$query$$&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/watchapps": f"{appstore}/{locale}/watchapps?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
+                "appstore/watchfaces": f"{appstore}/{locale}/watchfaces?access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=28&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "authentication/sign_in": f"{url_for('.auth', _external=True)}?access_token={access_token}&platform={platform}&release_id=207&ap_version=4.4&mid=$$phone_id$$&pid=$$pebble_id$$&redirect_uri=pebble%3A%2F%2Flogin",
                 "authentication/sign_up": f"{url_for('.auth', _external=True)}?access_token={access_token}&platform={platform}&release_id=207&ap_version=4.4&mid=$$phone_id$$&pid=$$pebble_id$$&redirect_uri=pebble%3A%2F%2Flogin",
                 "loading/buy_a_pebble": "https://getpebble.com?utm_campaign=PebbleApp&utm_medium=referral&utm_source={platform}-start-screen",
@@ -239,7 +239,7 @@ def boot_base():
 @stage2.route('/auth')
 def auth():
     me = rebble.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me/pebble/auth")
-    link = f"pebble://login#access_token={request.args['access_token']}&expires_in=null&signed_eula=2015-05-01&signed_privacy_policy=2015-11-18"
+    link = f"pebble://login#access_token={request.args['access_token']}&refresh_token=null&expires_in=null&signed_eula=2015-05-01&signed_privacy_policy=2015-11-18"
     return render_template('complete-auth.html', link=link, name=me.data['name'])
 
 
