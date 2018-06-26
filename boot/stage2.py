@@ -75,14 +75,14 @@ def generate_boot(platform):
                 # "remote_device_analytics": "https://pb-collector.getpebble.com/analytics",
                 # "resources": "https://dev-portal.getpebble.com/api?platform=ios&jsv=200",
                 # "trending_searches": "https://pebble-trending-searches.s3-us-west-2.amazonaws.com/production/data.json?hardware=$$hardware$$&platform=ios",
-                "users/app_locker": f"https://dev-portal.getpebble.com/api/users/locker?platform={platform}&jsv=200",
+                # "users/app_locker": f"https://dev-portal.getpebble.com/api/users/locker?platform={platform}&jsv=200",
                 "users/me": f"{config['APPSTORE_API_URL']}/api/v0/users/me?platform={platform}"
             },
             "locker": {
-                "add_endpoint": "https://appstore-api.getpebble.com/v2/locker/$$app_uuid$$",
-                "get_endpoint": "https://appstore-api.getpebble.com/v2/locker",
+                "add_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$",
+                "get_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker",
                 "onboarding_data": f"https://pebble-onboarding-data.s3-us-west-2.amazonaws.com/production/{platform}/$$hardware$$.json",
-                "remove_endpoint": "https://appstore-api.getpebble.com/v2/locker/$$app_uuid$$"
+                "remove_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$"
             },
             "notifications": {
                 "ios_app_icons": f"http://notif-app-icons.{config['DOMAIN_ROOT']}/{platform}/$$bundle_id$$/$$size$$.jpg"
