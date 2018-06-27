@@ -202,16 +202,25 @@ def generate_boot(platform):
                 "onboarding/nexmo_privacy_policy": "https://www.nexmo.com/privacy-policy/",
                 "onboarding/privacy_policy": "https://www.pebble.com/legal/privacy#",
                 "onboarding/sms_privacy_policy": "https://www.pebble.com/legal/privacy#sms",
-                "support": "http://help.getpebble.com/customer/en/portal/articles",
-                "support/android-actionable-notifications": "http://help.getpebble.com/customer/en/portal/articles/1819783",
-                "support/bt_findcode_help": "http://help.getpebble.com/customer/en/portal/articles/1422126",
-                "support/bt_pairing_help": "http://help.getpebble.com/customer/en/portal/articles/1786833",
-                "support/community": "http://help.getpebble.com/customer/en/portal/articles/1422153",
-                "support/faq": "http://help.getpebble.com/customer/en/portal/articles/1949825-faq?b_id=8309",
-                "support/fw_update_failed_help": "http://help.getpebble.com/customer/en/portal/articles/1774825",
-                "support/getting_started": "http://help.getpebble.com/customer/en/portal/articles/1957400?b_id=8309",
-                "support/ios_sms_replies": "http://help.getpebble.com/customer/en/portal/articles/2166170",
-                "support/suggest_something": "http://help.getpebble.com/customer/en/portal/articles/1889438?b_id=8309"
+                "support": "http://pebble-help-legacy.rebble.io/help.getpebble.com/index.html",
+                "support/android-actionable-notifications": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1819783-android---actionable-notifications.html",
+                "support/bt_findcode_help": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/portal/articles/1422126-finding-your-pebble-s-bluetooth-name.html",
+                "support/bt_pairing_help": {
+                    'ios': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1786833-ios---pairing.html",
+                    'android': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1774338-android---pairing.html",
+                }[platform],
+                "support/community": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/2643613-help-community22f6.html",
+                "support/faq": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1949825-frequently-asked-questions.html",
+                "support/fw_update_failed_help": {
+                    'ios': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1774825-ios---update-failed.html",
+                    'android': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1738034-android---update-fail.html",
+                }[platform],
+                "support/getting_started": {
+                    'ios': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/portal/articles/1957400-ios---getting-started-with-pebble-time6d9c.html",
+                    'android': "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/portal/articles/1936231-android---getting-started-with-pebble-time6d9c.html",
+                }[platform],
+                "support/ios_sms_replies": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/portal/articles/2166170-sms-messaging2d1a.html",
+                "support/suggest_something": "http://pebble-help-legacy.rebble.io/help.getpebble.com/customer/en/portal/articles/1889438-pebble-time-suggestions.html",
             }
         }
     }
