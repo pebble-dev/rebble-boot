@@ -19,9 +19,13 @@ init_auth(app)
 def index():
     if not session.get('access_token'):
         return redirect(url_for('auth.auth_start'))
-    stuff = rebble.get('me/pebble/auth')
-    if stuff.status != 200:
+    pebble_request = rebble.get('me/pebble/auth')
+    if pebble_request.status != 200:
         return render_template('need-pebble.html', auth=app.config['REBBLE_AUTH_URL'])
+
+    user_request = rebble.get('me')
+    if user_request.data['uid'] > 34559:
+        return render_template('not-imported-yet.html')
 
     platform = request.user_agent.platform
 
@@ -48,4 +52,4 @@ def index():
     link = f"pebble://custom-boot-config-url/{new_path}"
 
     return render_template('get-started.html', os=os, os_display=os_display[os], base=f"boot.{config['DOMAIN_ROOT']}",
-                           link=link, name=stuff.data['name'])
+                           link=link, name=pebble_request.data['name'])
