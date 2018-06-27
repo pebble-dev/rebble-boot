@@ -1,9 +1,83 @@
-{% extends "base.html" %}
-{% block body %}
-    <h2>Welcome to Rebble</h2>
-    <p>
-        You made it{% if name %}, {{ name }}{% endif %}! You're now ready for Rebble. To finish up, just tap
-        the button below.
-    </p>
-    <p><a href="{{ link }}" class="button">It's Rebble Time!</a></p>
-{% endblock %}
+<html>
+    <head>
+        <style>
+            body{
+                line-height:1.2;
+                font-family: PFDinDisplayProRegularWebfont, sans-serif;
+                text-align: center;
+                margin-top: calc(50vh - 120px);
+            }
+            html{
+                -webkit-box-sizing:border-box;
+                box-sizing:border-box
+            }
+            *,*:before,*:after{
+                box-sizing:inherit;
+                -webkit-box-sizing:inherit
+            }
+            html,body{
+                font-size:16px;
+                height:100%;
+                color:#ffffff
+            }
+            body{
+                background-color:#333333
+            }
+            .button{
+                font-weight:bold;
+                text-transform:uppercase;
+                background-color:#666666;
+                border-radius:0.25rem;
+                font-size:1.125rem;
+                line-height:0.8125rem;
+                border:none;
+                display:block;
+                color:#ffffff;
+                margin:0 auto 0.75rem;
+                width:100%;
+                text-align:center;
+                -webkit-user-select:none;
+                -moz-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+                -webkit-tap-highlight-color:transparent;
+                padding:1.125rem;
+                max-width: 250px;
+            }
+            button:disabled,.button:disabled{
+                background-color:#484848;
+                color:#848484
+            }
+            button:not(:disabled):active,.button:not(:disabled):active{
+                background-color:#848484
+            }
+            button.orange,.button.orange{
+                background-color:#ff4700
+            }
+            button.orange:disabled,.button.orange:disabled{
+                background-color:#992b00;
+                color:#848484
+            }
+            button.orange:not(:disabled):active,.button.orange:not(:disabled):active{
+                background-color:#ff0000
+            }
+            a {
+                text-decoration: none;
+            }
+            p {
+                padding-bottom: 20px;
+                padding-top: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Welcome to Rebble</h2>
+        <p>
+            You made it{% if name %}, {{ name }}{% endif %}! You're now ready for Rebble. To finish up, just tap
+            the button below.
+        </p>
+        <p><a href="{{ link }}" class="button orange">It's Rebble Time!</a></p>
+    </body>
+</html>

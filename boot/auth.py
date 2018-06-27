@@ -1,9 +1,10 @@
 import secrets
 
-from flask import abort, request, session, url_for, Blueprint, redirect
-from flask_oauthlib.client import OAuth
+from flask import abort, request, session, url_for, Blueprint, redirect, Response
+from flask_oauthlib.client import OAuth, OAuthException
 
 from .settings import config
+import logging
 
 oauth = OAuth()
 
@@ -15,16 +16,18 @@ def prepare_state():
 
 
 def get_state():
-    return session['oauth_state']
+    return session.get('oauth_state')
 
 
 def validate_state():
-    expected_state = session['oauth_state']
+    expected_state = session.get('oauth_state')
     if expected_state is None:
-        abort(401)
+        logging.error("Missing oauth_state!")
+        abort(Response(f"Your <code>oauth_state</code> is missing from your session! Ensure cookies are enabled and <a href='{url_for('.auth_start')}'>try again</a>.", 400))
     del session['oauth_state']
     if request.args.get('state') != expected_state:
-        abort(401)
+        logging.error(f"Incorrect oauth_state! (expected {expected_state}, got {request.args.get('state')})")
+        abort(Response(f"Your <code>state</code> is wrong! <a href='{url_for('.auth_start')}'>Try again.</a>", 400))
 
 
 rebble = oauth.remote_app(
@@ -48,9 +51,14 @@ def auth_start():
 @auth_blueprint.route('/complete')
 def auth_complete():
     validate_state()
-    resp = rebble.authorized_response()
+    try:
+        resp = rebble.authorized_response()
+    except OAuthException as e:
+        logging.error(f"OAuth failed: {e}")
+        return f"OAuth failed. <a href='{url_for('.auth_start')}'>Try again.</a>", 400
     if resp is None or resp.get('access_token') is None:
-        return 'Failed.'
+        logging.warning("Turned up with no access token.")
+        return f"The authentication server rejected us. <a href='{url_for('.auth_start')}'>Try again.</a>", 401
     session['access_token'] = resp['access_token']
     return_to = session.get('return_to')
     if return_to:
