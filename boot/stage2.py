@@ -48,7 +48,7 @@ def generate_boot(platform):
             },
             "href": request.url,
             "id": f"{platform}/v1",
-            # "linked_services": {
+            "linked_services": {
             #     "account_refresh_endpoint": "https://linked-accounts.getpebble.com/v1/providers/$$provider$$/refresh",
             #     "account_revoke_endpoint": "https://linked-accounts.getpebble.com/v1/providers/$$provider$$/revoke",
             #     "authorize_sessions_endpoint": "https://linked-accounts.getpebble.com/v1/providers/$$provider$$/authorize/sessions?state=$$state$$",
@@ -61,7 +61,7 @@ def generate_boot(platform):
             #     "reauthorize_pin_verify_endpoint": "https://linked-accounts.getpebble.com/v1/providers/$$provider$$/reauthorize/pin/verify",
             #     "reauthorize_sessions_endpoint": "https://linked-accounts.getpebble.com/v1/providers/$$provider$$/reauthorize/sessions",
             #     "sms_send_endpoint": "https://sms-api.getpebble.com/v1/sms/actions/send/$$transaction_id$$"
-            # },
+            },
             "links": {
                 # "apps/app_index": "https://dev-portal.getpebble.com/api/categories/index?platform=ios&jsv=200",
                 # "apps/categories": "https://dev-portal.getpebble.com/api/categories?platform=ios&jsv=200",
@@ -71,7 +71,7 @@ def generate_boot(platform):
                 "authentication/me": f"{config['REBBLE_AUTH_URL']}/api/v1/me/pebble/auth",
                 # "authentication/push_tokens": "https://auth.getpebble.com/api/v1/push_tokens?platform=ios",
                 # "diagnostics": "https://auth-api.getpebble.com/api/v2/users/diagnostics",
-                "i18n/language_packs": "https://lp.getpebble.com/v1/languages",
+                "i18n/language_packs": f"{config['LANGUAGE_PACK_URL']}/v1/languages",
                 # "remote_device_analytics": "https://pb-collector.getpebble.com/analytics",
                 # "resources": "https://dev-portal.getpebble.com/api?platform=ios&jsv=200",
                 # "trending_searches": "https://pebble-trending-searches.s3-us-west-2.amazonaws.com/production/data.json?hardware=$$hardware$$&platform=ios",
