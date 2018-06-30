@@ -11,6 +11,8 @@ config = {
     'APPSTORE_API_URL': environ.get('APPSTORE_API_URL', f"http://appstore-api.{domain_root}"),
     'COHORTS_URL': environ.get('COHORTS_URL', f"http://cohorts.{domain_root}"),
     'LANGUAGE_PACK_URL': environ.get('LANGUAGE_PACK_URL', f"http://lp.{domain_root}"),
+    'WEATHER_URL': environ.get('WEATHER_URL', f'http://weather.{domain_root}'),
+    'ASR_ROOT': environ.get('ASR_ROOT', f"asr.{domain_root}"),
     'AUTH_REBBLE': {
         'consumer_key': environ['REBBLE_CONSUMER_KEY'],
         'consumer_secret': environ['REBBLE_CONSUMER_SECRET'],

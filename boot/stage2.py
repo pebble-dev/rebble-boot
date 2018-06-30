@@ -1,3 +1,4 @@
+import requests
 from flask import Blueprint, jsonify, request, url_for, render_template
 
 from .auth import rebble
@@ -15,7 +16,7 @@ def generate_boot(platform):
     locale = request.args.get('locale', 'en_US')
     appstore = f"https://apps.rebble.io"
 
-    return {
+    boot = {
         "config": {
             "algolia": {
                 "api_key": "252f4938082b8693a8a9fc0157d1d24f",
@@ -102,86 +103,7 @@ def generate_boot(platform):
                 "first_party_uuids": [
                     "3351e678-c9c3-4299-b573-47637aebe34a"
                 ],
-                "languages": [
-                    {
-                        "endpoint": "pebble-ncs-dan-DNK.nuancemobility.net",
-                        "four_char_locale": "da_DK",
-                        "six_char_locale": "dan-DNK"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-deu-DEU.nuancemobility.net",
-                        "four_char_locale": "de_DE",
-                        "six_char_locale": "deu-DEU"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-eng-AUS.nuancemobility.net",
-                        "four_char_locale": "en_AU",
-                        "six_char_locale": "eng-AUS"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-eng-GBR.nuancemobility.net",
-                        "four_char_locale": "en_GB",
-                        "six_char_locale": "eng-GBR"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-eng-USA.nuancemobility.net",
-                        "four_char_locale": "en_US",
-                        "six_char_locale": "eng-USA"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-fin-FIN.nuancemobility.net",
-                        "four_char_locale": "fi_FI",
-                        "six_char_locale": "fin-FIN"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-fra-CAN.nuancemobility.net",
-                        "four_char_locale": "fr_CA",
-                        "six_char_locale": "fra-CAN"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-fra-FRA.nuancemobility.net",
-                        "four_char_locale": "fr_FR",
-                        "six_char_locale": "fra-FRA"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-ita-ITA.nuancemobility.net",
-                        "four_char_locale": "it_IT",
-                        "six_char_locale": "ita-ITA"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-nld-NLD.nuancemobility.net",
-                        "four_char_locale": "nl_NL",
-                        "six_char_locale": "nld-NLD"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-nor-NOR.nuancemobility.net",
-                        "four_char_locale": "nb_NO",
-                        "six_char_locale": "nor-NOR"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-por-PRT.nuancemobility.net",
-                        "four_char_locale": "pt_PT",
-                        "six_char_locale": "por-PRT"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-spa-ESP.nuancemobility.net",
-                        "four_char_locale": "es_ES",
-                        "six_char_locale": "spa-ESP"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-spa-XLA.nuancemobility.net",
-                        "four_char_locale": "es_MX",
-                        "six_char_locale": "spa-XLA"
-                    },
-                    {
-                        "endpoint": "pebble-ncs-swe-SWE.nuancemobility.net",
-                        "four_char_locale": "sv_SE",
-                        "six_char_locale": "swe-SWE"
-                    }
-                ]
-            },
-            "weather": {
-                "url": "https://api.weather.com/v2/geocode/$$latitude$$/$$longitude$$/aggregate.json?apiKey=bbf04402eb962506451832d6a828b4d0&products=conditions,fcstdaily7&language=$$language$$&units=$$units$$"
+                "languages": [],
             },
             "webviews": {
                 "appstore/application": f"{appstore}/{locale}/application/$$id$$?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
@@ -224,6 +146,37 @@ def generate_boot(platform):
             }
         }
     }
+
+    user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me", headers={'Authorization': f"Bearer {access_token}"})
+    if user.ok:
+        if user.json().get('is_subscribed', False):
+            boot['config']['weather'] = {
+                'url': f"{config['WEATHER_URL']}/api/v1/geocode/$$latitude$$/$$longitude$$/?access_token={access_token}&language=$$language$$&units=$$units$$"
+            }
+            asr_token_req = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/dictation-token",
+                                     headers={'Authorization': f"Bearer {access_token}"})
+            if asr_token_req.ok:
+                asr_token = asr_token_req.json()['token']
+                boot['config']['voice']['languages'] = [{
+                    'endpoint': f"{asr_token}-{code.replace('_', '-').lower()}.{config['ASR_ROOT']}",
+                    'four_char_locale': code,
+                    'six_char_locale': nuance_code,
+                } for code, nuance_code in [
+                    ('en_US', 'eng-USA'),
+                    ('en_GB', 'eng-ENG'),
+                    ('en_CA', 'eng-CAN'),
+                    ('fi_FI', 'fin-FIN'),
+                    ('fr_CA', 'fra-CAN'),
+                    ('fr_FR', 'fra-FRA'),
+                    ('it_IT', 'ita_ITA'),
+                    ('nl_NL', 'nld-NLD'),
+                    ('nb_NO', 'nor-NOR'),
+                    ('pt_PT', 'por-PRT'),
+                    ('es_ES', 'spa-ESP'),
+                    ('es_MX', 'spa-XLA'),
+                    ('sv_SE', 'swe-SWE'),
+                ]]
+    return boot
 
 
 @stage2.route('/ios')
