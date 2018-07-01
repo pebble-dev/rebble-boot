@@ -14,6 +14,11 @@ def generate_boot(platform):
     app_version = request.args.get('app_version')
     access_token = request.args['access_token']
     locale = request.args.get('locale', 'en_US')
+
+    #  Otherwise we end up directing people to nonexistent pages, I guess?
+    if locale not in {'en_US', 'fr_FR', 'de_DE', 'es_ES', 'nl_NL', 'pl_PL', 'zh_CN', 'zh_TW'}:
+        locale = 'en_US'
+
     appstore = f"https://apps.rebble.io"
 
     boot = {
@@ -162,6 +167,9 @@ def generate_boot(platform):
                     'four_char_locale': code,
                     'six_char_locale': nuance_code,
                 } for code, nuance_code in [
+                    ('da_DK', 'dan-DNK'),
+                    ('de_DE', 'deu-DEU'),
+                    ('en_AU', 'eng-AUS'),
                     ('en_US', 'eng-USA'),
                     ('en_GB', 'eng-ENG'),
                     ('en_CA', 'eng-CAN'),
@@ -172,6 +180,7 @@ def generate_boot(platform):
                     ('nl_NL', 'nld-NLD'),
                     ('nb_NO', 'nor-NOR'),
                     ('pt_PT', 'por-PRT'),
+                    ('pl_PL', 'pol-POL'),
                     ('es_ES', 'spa-ESP'),
                     ('es_MX', 'spa-XLA'),
                     ('sv_SE', 'swe-SWE'),
