@@ -20,12 +20,6 @@ def index():
     if not session.get('access_token'):
         return redirect(url_for('auth.auth_start'))
     pebble_request = rebble.get('me/pebble/auth')
-    if pebble_request.status != 200:
-        return render_template('need-pebble.html', auth=app.config['REBBLE_AUTH_URL'])
-
-    user_request = rebble.get('me')
-    if user_request.data['uid'] > 34559:
-        return render_template('not-imported-yet.html')
 
     platform = request.user_agent.platform
 
