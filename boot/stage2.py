@@ -152,7 +152,7 @@ def generate_boot(platform):
         }
     }
 
-    user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me", headers={'Authorization': f"Bearer {access_token}"})
+    user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me?flag_authed=true", headers={'Authorization': f"Bearer {access_token}"})
     if user.ok:
         if user.json().get('is_subscribed', False):
             boot['config']['weather'] = {
@@ -167,23 +167,46 @@ def generate_boot(platform):
                     'four_char_locale': code,
                     'six_char_locale': nuance_code,
                 } for code, nuance_code in [
+                    ('af_ZA', 'afr-SAF'),
+                    ('cs-CZ', 'ces-CES'),
                     ('da_DK', 'dan-DNK'),
                     ('de_DE', 'deu-DEU'),
                     ('en_AU', 'eng-AUS'),
                     ('en_US', 'eng-USA'),
                     ('en_GB', 'eng-ENG'),
+                    ('en_IN', 'eng-IND'),
                     ('en_CA', 'eng-CAN'),
                     ('fi_FI', 'fin-FIN'),
+                    ('fil_PH', 'fil-PIL'),
                     ('fr_CA', 'fra-CAN'),
                     ('fr_FR', 'fra-FRA'),
+                    ('gl_ES', 'gal-ESP'),
+                    ('id_ID', 'bah-IND'),
+                    ('is_IS', 'isl-ISL'),
                     ('it_IT', 'ita_ITA'),
+                    ('lv_LV', 'lat-LAT'),
+                    ('lt_LT', 'lie-LIE'),
+                    ('hr_HR', 'hrv-HRV'),
+                    ('hu_HU', 'mag-MAG'),
+                    ('ms_MY', 'bah-MAL'),
                     ('nl_NL', 'nld-NLD'),
                     ('nb_NO', 'nor-NOR'),
                     ('pt_PT', 'por-PRT'),
                     ('pl_PL', 'pol-POL'),
+                    ('ro_RO', 'rom-ROM'),
+                    ('ru_RU', 'rus-RUS'),
                     ('es_ES', 'spa-ESP'),
                     ('es_MX', 'spa-XLA'),
+                    ('es_US', 'spa-USA'),
+                    ('sk_SK', 'slk-SLK'),
+                    ('sl_SL', 'sln-SLN'),
                     ('sv_SE', 'swe-SWE'),
+                    ('sw_TZ', 'swa-TAN'),
+                    ('sw_KE', 'swa-KEN'),
+                    ('tr_TR', 'tur-TUR'),
+                    ('zu-ZA', 'zul-SAF'),
+                    ('cmn-Hant-TW', 'man-TAI'),
+                    ('cmn-Hans-CN', 'man-CHI'),
                 ]]
     return boot
 
