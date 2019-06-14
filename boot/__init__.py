@@ -1,7 +1,7 @@
 import time
 import urllib.parse
 
-from flask import Flask, session, redirect, url_for, render_template, request
+from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
 
 from .stage1 import init_app as init_stage1
 from .stage2 import init_app as init_stage2
@@ -47,3 +47,8 @@ def index():
 
     return render_template('get-started.html', os=os, os_display=os_display[os], base=f"boot.{config['DOMAIN_ROOT']}",
                            link=link, name=pebble_request.data['name'])
+
+@app.route('/logout')
+def logout():
+    session['access_token'] = None
+    return send_from_directory('templates', 'logged-out.png', mimetype='image/png', cache_timeout=0, add_etags=False)
