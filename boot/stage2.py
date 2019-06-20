@@ -184,6 +184,7 @@ def generate_boot(platform):
                     ('id_ID', 'bah-IND'),
                     ('is_IS', 'isl-ISL'),
                     ('it_IT', 'ita_ITA'),
+                    ('ko_KR', 'kor_KOR'),
                     ('lv_LV', 'lat-LAT'),
                     ('lt_LT', 'lie-LIE'),
                     ('hr_HR', 'hrv-HRV'),
