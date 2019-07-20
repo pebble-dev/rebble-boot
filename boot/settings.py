@@ -8,6 +8,7 @@ config = {
     'SECRET_KEY': environ['SECRET_KEY'],
     'DOMAIN_ROOT': domain_root,
     'REBBLE_AUTH_URL': environ.get('REBBLE_AUTH_URL', f"{http_protocol}://auth.{domain_root}"),
+    'REBBLE_TIMELINE_URL': environ.get('REBBLE_TIMELINE_URL', f"{http_protocol}://timeline-api.{domain_root}"),
     'APPSTORE_URL': environ.get('APPSTORE_URL', f"http://apps.{domain_root}"),
     'APPSTORE_API_URL': environ.get('APPSTORE_API_URL', f"http://appstore-api.{domain_root}"),
     'COHORTS_URL': environ.get('COHORTS_URL', f"http://cohorts.{domain_root}"),
