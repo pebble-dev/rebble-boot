@@ -9,12 +9,6 @@ CLOUDPEBBLE_WS_PROXY = f"wss://ws-proxy.cloudpebble.{config['DOMAIN_ROOT']}/devi
 
 stage2 = Blueprint('stage2', __name__)
 
-def timeline_rollout(user):
-    if user.get('is_wizard', False):
-        return True
-    
-    return False # otherwise, do something on user.uid rolling out over time
-
 def generate_boot(platform):
     app_version = request.args.get('app_version')
     access_token = request.args['access_token']
@@ -159,18 +153,17 @@ def generate_boot(platform):
 
     user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me?flag_authed=true", headers={'Authorization': f"Bearer {access_token}"})
     if user.ok:
-        if timeline_rollout(user.json()):
+        if user.json().get('has_timeline', False):
             boot['config']['timeline'] = {
                 "pin_ttl_seconds": 259200,
                 "sandbox_user_token": f"{config['REBBLE_TIMELINE_URL']}/v1/tokens/sandbox/$$uuid$$",
                 "subscribe_to_topic": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions/$$topic_id$$",
                 "subscriptions_list": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions",
                 "sync_endpoint":      f"{config['REBBLE_TIMELINE_URL']}/v1/sync",
-                "sync_policy_minutes": 60 * 3
+                "sync_policy_minutes": user.json().get('timeline_ttl', 3 * 60)
             }
 
         if user.json().get('is_subscribed', False):
-            boot['config']['timeline']['sync_policy_minutes'] = 60
             boot['config']['weather'] = {
                 'url': f"{config['WEATHER_URL']}/api/v1/geocode/$$latitude$$/$$longitude$$/?access_token={access_token}&language=$$language$$&units=$$units$$"
             }
