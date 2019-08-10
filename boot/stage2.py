@@ -120,7 +120,7 @@ def generate_boot(platform):
                 "appstore/watchfaces": f"{appstore}/{locale}/watchfaces?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "authentication/sign_in": f"{url_for('.auth', _external=True)}?&access_token={access_token}&platform={platform}&release_id=207&ap_version=4.4&mid=$$phone_id$$&pid=$$pebble_id$$&redirect_uri=pebble%3A%2F%2Flogin",
                 "authentication/sign_up": f"{url_for('.auth', _external=True)}?&access_token={access_token}&platform={platform}&release_id=207&ap_version=4.4&mid=$$phone_id$$&pid=$$pebble_id$$&redirect_uri=pebble%3A%2F%2Flogin",
-                "loading/buy_a_pebble": "https://getpebble.com?utm_campaign=PebbleApp&utm_medium=referral&utm_source={platform}-start-screen",
+                "loading/buy_a_pebble": f"https://getpebble.com?utm_campaign=PebbleApp&utm_medium=referral&utm_source={platform}-start-screen",
                 "onboarding/get_more_info": "http://help.getpebble.com/customer/portal/articles/1422148-migration",
                 "onboarding/get_some_apps": f"{appstore}/{locale}/onboarding/getsomeapps?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "onboarding/migrate": f"{appstore}/{locale}/onboarding/migrate?platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
@@ -218,6 +218,45 @@ def generate_boot(platform):
                     ('cmn-Hant-TW', 'man-TAI'),
                     ('cmn-Hans-CN', 'man-CHI'),
                 ]]
+
+        overrides = user.json().get('boot_overrides', None)
+        if overrides and type(overrides) == dict:
+            allowed_overrides = {
+                "config": {
+                    "webviews": {
+                        "appstore/application": True,
+                        "appstore/application_changelog": True, 
+                        "appstore/application_share": True,
+                        "appstore/developer_apps": True,
+                        "appstore/search": True,
+                        "appstore/search/query": True,
+                        "appstore/watchapps": True,
+                        "appstore/watchfaces": True
+                    }
+                }
+            }
+            
+            def recur_overrides(ovr, cfg, allowed):
+                for key in ovr:
+                    if key not in allowed:
+                        continue
+                    
+                    if allowed[key] == True:
+                        # We could do a better job traversing downwards, I
+                        # suppose.  But this will work for now.
+                        if type(ovr[key]) == str:
+                            cfg[key] = ovr[key].format(access_token = access_token, platform = platform)
+                        else:
+                            cfg[key] = ovr[key]
+                    elif type(allowed[key]) == dict:
+                        if key not in cfg:
+                            cfg[key] = {}
+                        recur_overrides(ovr[key], cfg[key], allowed[key])
+                    else:
+                        raise Exception("invalid override")
+            
+            recur_overrides(overrides, boot, allowed_overrides)
+
     return boot
 
 
