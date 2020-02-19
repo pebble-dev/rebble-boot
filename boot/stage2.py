@@ -223,6 +223,8 @@ def generate_boot(platform):
         if overrides and type(overrides) == dict:
             allowed_overrides = {
                 "config": {
+                    "voice": True,
+                    "health": True,
                     "webviews": {
                         "appstore/application": True,
                         "appstore/application_changelog": True, 
