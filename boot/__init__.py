@@ -1,12 +1,21 @@
 import time
 import urllib.parse
 
+from .settings import config
+
+# Lightstep tracing
+from ddtrace import tracer, patch_all
+from ddtrace.propagation.b3 import B3HTTPPropagator
+if config['LIGHTSTEP_KEY'] is not None:
+    tracer.set_tags({'lightstep.service_name': 'boot', 'lightstep.access_token': config['LIGHTSTEP_KEY']})
+    tracer.configure(http_propagator=B3HTTPPropagator)
+    patch_all()
+
 from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
 
 from .stage1 import init_app as init_stage1
 from .stage2 import init_app as init_stage2
 from .auth import rebble, init_app as init_auth
-from .settings import config
 
 app = Flask(__name__)
 app.config.update(**config)

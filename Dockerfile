@@ -5,4 +5,4 @@ ADD . /code
 WORKDIR /code
 RUN pip install -r requirements.txt
 CMD ["ls", "-l"]
-CMD ["python", "serve_debug.py"]
+CMD ["ls-trace-run", "python", "serve_debug.py"]

@@ -15,6 +15,7 @@ config = {
     'LANGUAGE_PACK_URL': environ.get('LANGUAGE_PACK_URL', f"http://lp.{domain_root}"),
     'WEATHER_URL': environ.get('WEATHER_URL', f'http://weather.{domain_root}'),
     'ASR_ROOT': environ.get('ASR_ROOT', f"asr.{domain_root}"),
+    'LIGHTSTEP_KEY': environ.get('LIGHTSTEP_KEY', None),
     'AUTH_REBBLE': {
         'consumer_key': environ['REBBLE_CONSUMER_KEY'],
         'consumer_secret': environ['REBBLE_CONSUMER_SECRET'],
