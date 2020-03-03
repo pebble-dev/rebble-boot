@@ -1,5 +1,6 @@
 import requests
 from flask import Blueprint, jsonify, request, url_for, render_template
+from beeline import traced
 
 from .auth import rebble
 from .settings import config
@@ -9,6 +10,7 @@ CLOUDPEBBLE_WS_PROXY = f"wss://ws-proxy.cloudpebble.{config['DOMAIN_ROOT']}/devi
 
 stage2 = Blueprint('stage2', __name__)
 
+@traced(name='generate_boot')
 def generate_boot(platform):
     app_version = request.args.get('app_version')
     access_token = request.args['access_token']

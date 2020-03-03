@@ -10,7 +10,6 @@ oauth = OAuth()
 
 auth_blueprint = Blueprint('auth', __name__)
 
-
 def prepare_state():
     session['oauth_state'] = secrets.token_urlsafe()
 
