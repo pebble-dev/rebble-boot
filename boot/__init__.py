@@ -2,6 +2,8 @@ import time
 import urllib.parse
 
 from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
+import beeline
+from beeline.middleware.flask import HoneyMiddleware
 
 from .stage1 import init_app as init_stage1
 from .stage2 import init_app as init_stage2
@@ -10,6 +12,9 @@ from .settings import config
 
 app = Flask(__name__)
 app.config.update(**config)
+if config['HONEYCOMB_KEY']:
+     beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot')
+     HoneyMiddleware(app, db_events = True)
 init_stage1(app)
 init_stage2(app)
 init_auth(app)

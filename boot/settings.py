@@ -18,5 +18,6 @@ config = {
     'AUTH_REBBLE': {
         'consumer_key': environ['REBBLE_CONSUMER_KEY'],
         'consumer_secret': environ['REBBLE_CONSUMER_SECRET'],
-    }
+    },
+    'HONEYCOMB_KEY': environ.get('HONEYCOMB_KEY', None),
 }
