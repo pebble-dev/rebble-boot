@@ -7,7 +7,7 @@ import requests
 
 from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
 from beeline.middleware.flask import HoneyMiddleware
-
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .stage1 import init_app as init_stage1
 from .stage2 import init_app as init_stage2
@@ -19,6 +19,7 @@ app.config.update(**config)
 if config['HONEYCOMB_KEY']:
      beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot')
      HoneyMiddleware(app, db_events = True)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 init_stage1(app)
 init_stage2(app)
 init_auth(app)
