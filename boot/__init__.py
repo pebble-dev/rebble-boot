@@ -1,3 +1,9 @@
+try:
+    import googleclouddebugger
+    googleclouddebugger.enable()
+except ImportError:
+    pass
+
 import time
 import urllib.parse
 
@@ -7,6 +13,7 @@ import requests
 
 from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
 from beeline.middleware.flask import HoneyMiddleware
+import werkzeug
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .stage1 import init_app as init_stage1

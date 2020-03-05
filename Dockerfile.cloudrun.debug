@@ -1,0 +1,9 @@
+FROM python:3.6
+RUN apt-get update
+RUN apt-get install -y libpq-dev build-essential
+RUN pip install gunicorn
+RUN pip install google-python-cloud-debugger
+ADD . /code
+WORKDIR /code
+RUN pip install -r requirements.txt
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 boot:app
