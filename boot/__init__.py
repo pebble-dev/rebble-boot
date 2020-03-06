@@ -78,6 +78,10 @@ def logout():
     session['access_token'] = None
     return send_from_directory('templates', 'logged-out.png', mimetype='image/png', cache_timeout=0, add_etags=False)
 
+@app.route('/heartbeat')
+def heartbeat():
+    return 'ok'
+
 # XXX: This maybe ought be upstreamed to Beeline.
 from wrapt import wrap_function_wrapper
 import beeline
