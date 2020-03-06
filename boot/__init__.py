@@ -27,6 +27,8 @@ if config['HONEYCOMB_KEY']:
      beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot')
      HoneyMiddleware(app, db_events = True)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+if not app.debug:
+    app.config['PREFERRED_URL_SCHEME'] = 'https'
 init_stage1(app)
 init_stage2(app)
 init_auth(app)
