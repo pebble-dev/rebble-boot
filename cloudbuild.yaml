@@ -2,7 +2,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - build
-  - "--tag=gcr.io/pebble-rebirth/boot"
+  - "--tag=gcr.io/pebble-rebirth/boot:$TAG_NAME"
   - "--file=./Dockerfile.cloudrun"
   - .
 images:
