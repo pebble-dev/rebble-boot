@@ -31,7 +31,7 @@ def validate_state():
 
 rebble = oauth.remote_app(
     'rebble',
-    base_url=f'{config["REBBLE_AUTH_URL"]}/api/v1/',
+    base_url=f'{config["REBBLE_AUTH_INT_URL"]}/api/v1/',
     request_token_url=None,
     access_token_method='POST',
     access_token_url=f'{config["REBBLE_AUTH_URL"]}/oauth/token',
