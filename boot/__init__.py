@@ -42,13 +42,14 @@ import beeline
 def before_request():
     beeline.add_context_field("route", request.endpoint)
     if session.get('access_token'):
-        beeline.add_context_field("user", session['access_token'])
+        beeline.add_context_field("access_token", session['access_token'][-6:])
 
 @app.route('/')
 def index():
     if not session.get('access_token'):
         return redirect(url_for('auth.auth_start'))
     pebble_request = rebble.get('me/pebble/auth')
+    beeline.add_context_field("user", pebble_request.data['uid'])
 
     platform = request.user_agent.platform
 

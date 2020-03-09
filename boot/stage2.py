@@ -154,7 +154,12 @@ def generate_boot(platform):
     }
 
     user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me?flag_authed=true", headers={'Authorization': f"Bearer {access_token}"})
+    beeline.add_context_field("user.ok", user.ok)
     if user.ok:
+        beeline.add_context_field("user", user.json().get('uid'))
+        beeline.add_context_field("user.has_timeline", user.json().get('has_timeline', False))
+        beeline.add_context_field("user.is_subscribed", user.json().get('is_subscribed', False))
+
         if user.json().get('has_timeline', False):
             boot['config']['timeline'] = {
                 "pin_ttl_seconds": 259200,
@@ -286,6 +291,7 @@ def boot_base():
 @stage2.route('/auth')
 def auth():
     me = rebble.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me/pebble/auth")
+    beeline.add_context_field("user", me.data['uid'])
     link = f"pebble://login#access_token={request.args['access_token']}&refresh_token=null&expires_in=null&signed_eula=2015-05-01&signed_privacy_policy=2015-11-18"
     return render_template('complete-auth.html', link=link, name=me.data['name'])
 
