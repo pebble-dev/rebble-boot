@@ -1,6 +1,6 @@
 import requests
 from flask import Blueprint, jsonify, request, url_for, render_template
-from beeline import traced
+import beeline
 
 from .auth import rebble
 from .settings import config
@@ -10,7 +10,7 @@ CLOUDPEBBLE_WS_PROXY = f"wss://ws-proxy.cloudpebble.{config['DOMAIN_ROOT']}/devi
 
 stage2 = Blueprint('stage2', __name__)
 
-@traced(name='generate_boot')
+@beeline.traced(name='generate_boot')
 def generate_boot(platform):
     app_version = request.args.get('app_version')
     access_token = request.args['access_token']
@@ -291,7 +291,6 @@ def boot_base():
 @stage2.route('/auth')
 def auth():
     me = rebble.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me/pebble/auth")
-    beeline.add_context_field("user", me.data['uid'])
     link = f"pebble://login#access_token={request.args['access_token']}&refresh_token=null&expires_in=null&signed_eula=2015-05-01&signed_privacy_policy=2015-11-18"
     return render_template('complete-auth.html', link=link, name=me.data['name'])
 
