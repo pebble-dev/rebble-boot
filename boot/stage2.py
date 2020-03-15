@@ -153,31 +153,31 @@ def generate_boot(platform):
         }
     }
 
-    user = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me?flag_authed=true", headers={'Authorization': f"Bearer {access_token}"})
-    beeline.add_context_field("user.ok", user.ok)
-    if user.ok:
-        beeline.add_context_field("user", user.json().get('uid'))
-        beeline.add_context_field("user.has_timeline", user.json().get('has_timeline', False))
-        beeline.add_context_field("user.is_subscribed", user.json().get('is_subscribed', False))
+    user = rebble.get(f"me?flag_authed=true")
+    user_ok = user.status == 200
+    beeline.add_context_field("user.ok", user_ok)
+    if user_ok:
+        beeline.add_context_field("user", user.data.get('uid'))
+        beeline.add_context_field("user.has_timeline", user.data.get('has_timeline', False))
+        beeline.add_context_field("user.is_subscribed", user.data.get('is_subscribed', False))
 
-        if user.json().get('has_timeline', False):
+        if user.data.get('has_timeline', False):
             boot['config']['timeline'] = {
                 "pin_ttl_seconds": 259200,
                 "sandbox_user_token": f"{config['REBBLE_TIMELINE_URL']}/v1/tokens/sandbox/$$uuid$$",
                 "subscribe_to_topic": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions/$$topic_id$$",
                 "subscriptions_list": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions",
                 "sync_endpoint":      f"{config['REBBLE_TIMELINE_URL']}/v1/sync",
-                "sync_policy_minutes": user.json().get('timeline_ttl', 3 * 60)
+                "sync_policy_minutes": user.data.get('timeline_ttl', 3 * 60)
             }
 
-        if user.json().get('is_subscribed', False):
+        if user.data.get('is_subscribed', False):
             boot['config']['weather'] = {
                 'url': f"{config['WEATHER_URL']}/api/v1/geocode/$$latitude$$/$$longitude$$/?access_token={access_token}&language=$$language$$&units=$$units$$"
             }
-            asr_token_req = requests.get(f"{config['REBBLE_AUTH_URL']}/api/v1/dictation-token",
-                                     headers={'Authorization': f"Bearer {access_token}"})
-            if asr_token_req.ok:
-                asr_token = asr_token_req.json()['token']
+            asr_token_req = rebble.get(f"dictation-token",)
+            if asr_token_req.status == 200:
+                asr_token = asr_token_req.data['token']
                 boot['config']['voice']['languages'] = [{
                     'endpoint': f"{asr_token}-{code.replace('_', '-').lower()}.{config['ASR_ROOT']}",
                     'four_char_locale': code,
@@ -226,7 +226,7 @@ def generate_boot(platform):
                     ('cmn-Hans-CN', 'man-CHI'),
                 ]]
 
-        overrides = user.json().get('boot_overrides', None)
+        overrides = user.data.get('boot_overrides', None)
         if overrides and type(overrides) == dict:
             allowed_overrides = {
                 "config": {
@@ -290,7 +290,7 @@ def boot_base():
 
 @stage2.route('/auth')
 def auth():
-    me = rebble.get(f"{config['REBBLE_AUTH_URL']}/api/v1/me/pebble/auth")
+    me = rebble.get(f"me/pebble/auth")
     link = f"pebble://login#access_token={request.args['access_token']}&refresh_token=null&expires_in=null&signed_eula=2015-05-01&signed_privacy_policy=2015-11-18"
     return render_template('complete-auth.html', link=link, name=me.data['name'])
 
