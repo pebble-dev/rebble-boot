@@ -7,6 +7,7 @@ config = {
 #    'SERVER_NAME': f"boot.{environ['DOMAIN_ROOT']}",
     'SECRET_KEY': environ['SECRET_KEY'],
     'DOMAIN_ROOT': domain_root,
+    'APPLICATION_ROOT': environ.get('SCRIPT_NAME', None),
     'REBBLE_AUTH_URL': environ.get('REBBLE_AUTH_URL', f"{http_protocol}://auth.{domain_root}"),
     'REBBLE_AUTH_INT_URL': environ.get('REBBLE_AUTH_INT_URL', f"{http_protocol}://auth.{domain_root}"),
     'REBBLE_TIMELINE_URL': environ.get('REBBLE_TIMELINE_URL', f"{http_protocol}://timeline-api.{domain_root}"),
