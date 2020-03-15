@@ -83,6 +83,7 @@ def logout():
     return send_from_directory('templates', 'logged-out.png', mimetype='image/png', cache_timeout=0, add_etags=False)
 
 @app.route('/heartbeat')
+@app.route('/boot/heartbeat')
 def heartbeat():
     return 'ok'
 
