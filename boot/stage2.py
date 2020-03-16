@@ -20,7 +20,7 @@ def generate_boot(platform):
     if locale not in {'en_US', 'fr_FR', 'de_DE', 'es_ES', 'nl_NL', 'pl_PL', 'zh_CN', 'zh_TW'}:
         locale = 'en_US'
 
-    appstore = f"https://apps.rebble.io"
+    appstore = config['APPSTORE_URL']
 
     boot = {
         "config": {
