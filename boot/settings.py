@@ -13,6 +13,7 @@ config = {
     'REBBLE_TIMELINE_URL': environ.get('REBBLE_TIMELINE_URL', f"{http_protocol}://timeline-api.{domain_root}"),
     'APPSTORE_URL': environ.get('APPSTORE_URL', f"http://apps.{domain_root}"),
     'APPSTORE_API_URL': environ.get('APPSTORE_API_URL', f"http://appstore-api.{domain_root}"),
+    'APPSTORE_API_LOCKER_URL': environ.get('APPSTORE_API_LOCKER_URL', f"http://appstore-api.{domain_root}"),
     'COHORTS_URL': environ.get('COHORTS_URL', f"http://cohorts.{domain_root}"),
     'LANGUAGE_PACK_URL': environ.get('LANGUAGE_PACK_URL', f"http://lp.{domain_root}"),
     'WEATHER_URL': environ.get('WEATHER_URL', f'http://weather.{domain_root}'),

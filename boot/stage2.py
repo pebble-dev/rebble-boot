@@ -87,7 +87,7 @@ def generate_boot(platform):
             },
             "locker": {
                 "add_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$",
-                "get_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker",
+                "get_endpoint": f"{config['APPSTORE_API_LOCKER_URL']}/api/v1/locker",
                 "onboarding_data": f"https://pebble-onboarding-data.s3-us-west-2.amazonaws.com/production/{platform}/$$hardware$$.json",
                 "remove_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$"
             },
