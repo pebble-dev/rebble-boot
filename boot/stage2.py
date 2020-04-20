@@ -241,7 +241,8 @@ def generate_boot(platform):
                         "appstore/search/query": True,
                         "appstore/watchapps": True,
                         "appstore/watchfaces": True
-                    }
+                    },
+                    "treasure_data": True
                 }
             }
             
