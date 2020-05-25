@@ -77,6 +77,10 @@ def index():
     return render_template('get-started.html', os=os, os_display=os_display[os], base=f"boot.{config['DOMAIN_ROOT']}",
                            link=link, name=pebble_request.data['name'])
 
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
+
 @app.route('/logout')
 def logout():
     session['access_token'] = None
