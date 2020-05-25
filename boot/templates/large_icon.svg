@@ -1,0 +1,23 @@
+<svg width="121" height="120" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" width="120" height="120" rx="60" fill="#00C3FD"/>
+<path d="M74 59L91 42L93 32L92 29L89 28L79 30L62 47H43L45 55L56 56L65 65L66 76L74 78V59Z" fill="white" stroke="black" stroke-width="4" stroke-linejoin="round"/>
+<path d="M62 47L74 59" stroke="black" stroke-width="3"/>
+<path d="M85 35H80L79 36H84L85 37V42L86 41V36L85 35Z" stroke="black" stroke-width="3" stroke-linejoin="round"/>
+<path d="M55 66L41 80" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M50 62L43 64" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M59 69L57 77" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M44 26V32" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M41 29H47" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M29 53V59" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M26 56H32" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M44 92V98" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M41 95H47" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M92 74V80" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<path d="M89 77H95" stroke="black" stroke-width="3" stroke-linecap="round"/>
+<rect x="31" y="38" width="3" height="3" rx="1.5" fill="black"/>
+<rect x="59" y="33" width="3" height="3" rx="1.5" fill="black"/>
+<rect x="29" y="82" width="3" height="3" rx="1.5" fill="black"/>
+<rect x="62" y="96" width="3" height="3" rx="1.5" fill="black"/>
+<rect x="73" y="86" width="3" height="3" rx="1.5" fill="black"/>
+<rect x="93" y="50" width="3" height="3" rx="1.5" fill="black"/>
+</svg>

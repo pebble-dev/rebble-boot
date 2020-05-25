@@ -5,7 +5,7 @@
                 line-height:1.2;
                 font-family: PFDinDisplayProRegularWebfont, sans-serif;
                 text-align: center;
-                margin-top: calc(50vh - 120px);
+                margin-top: calc(50vh - 220px);
             }
             html{
                 -webkit-box-sizing:border-box;
@@ -70,12 +70,19 @@
                 padding-left: 10px;
                 padding-right: 10px;
             }
+            p.logo {
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
         </style>
     </head>
     <body>
-        <h2>Welcome to Rebble</h2>
+        <h2>All set &mdash;<br>you're ready to Rebble!</h2>
+        <p class="logo">
+          <img src="large_icon.svg" alt="a Rebble-y rocket!">
+        </p>
         <p>
-            You made it{% if name %}, {{ name }}{% endif %}! You're now ready for Rebble. To finish up, just tap
+            You made it{% if name %}, {{ name }}{% endif %}! You're now ready for Rebble. To finish up, tap
             the button below.
         </p>
         <p><a href="{{ link }}" class="button orange">It's Rebble Time!</a></p>
