@@ -114,7 +114,7 @@ def generate_boot(platform):
             "webviews": {
                 "appstore/application": f"{appstore}/{locale}/application/$$id$$?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "appstore/application_changelog": f"{appstore}/{locale}/changelog/$$id$$?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
-                "appstore/application_share": f"{appstore}/applications/$$id$$",
+                "appstore/application_share": f"{appstore}/{locale}/applications/$$id$$",
                 "appstore/developer_apps": f"{appstore}/{locale}/developer/$$id$$?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "appstore/search": f"{appstore}/{locale}/search?&access_token={access_token}&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
                 "appstore/search/query": f"{appstore}/{locale}/search/$$search_type$$?&access_token={access_token}&native=true&query=$$query$$&platform={platform}&release_id=207&app_version=4.4&pebble_color=$$pebble_color$$&hardware=$$hardware$$&jsv=200&uid=$$user_id$$&mid=$$phone_id$$&pid=$$pebble_id$$&$$extras$$",
