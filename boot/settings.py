@@ -22,5 +22,5 @@ config = {
         'consumer_secret': environ['REBBLE_CONSUMER_SECRET'],
     },
     'HONEYCOMB_KEY': environ.get('HONEYCOMB_KEY', None),
-    'WS_PROXY_URL': environ.get('WS_PROXY_URL', f'ws://dev-ws-proxy.{domain_root}');
+    'WS_PROXY_URL': environ.get('WS_PROXY_URL', f'ws://dev-ws-proxy.{domain_root}'),
 }
