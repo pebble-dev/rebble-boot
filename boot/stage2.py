@@ -47,7 +47,7 @@ def generate_boot(platform):
                 "endpoint": f"{config['COHORTS_URL']}/cohort"
             },
             "developer": {
-                "ws_proxy_url": "wss://cloudpebble-ws-proxy-prod.herokuapp.com/device"
+                "ws_proxy_url": f"{config['WS_PROXY_URL']}"
             },
             "health": {
                 "post_activity_endpoint": "https://health-write-api.getpebble.com/v1/activity",
