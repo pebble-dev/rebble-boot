@@ -11,6 +11,6 @@ MarkupSafe==1.1.1
 oauthlib==2.1.0
 requests==2.20.0
 requests-oauthlib==1.0.0
-urllib3==1.24.2
+urllib3==1.26.5
 Werkzeug==0.16.1
 honeycomb-beeline==2.11.4
