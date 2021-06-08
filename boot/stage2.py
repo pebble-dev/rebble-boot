@@ -232,6 +232,10 @@ def generate_boot(platform):
                 "config": {
                     "voice": True,
                     "health": True,
+                    "weather": {
+                        "url": True,
+                        "provider_name": True
+                    },
                     "webviews": {
                         "appstore/application": True,
                         "appstore/application_changelog": True, 
