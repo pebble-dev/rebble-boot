@@ -106,9 +106,7 @@ def generate_boot(platform):
                 "sync_policy_minutes": 60
             },
             "treasure_data": {
-# We'll turn this on for everyone tomorrow.
-#
-#                "endpoint": "https://treasure.rebble.io",
+                "endpoint": "https://treasure.rebble.io",
             },
             "voice": {
                 "first_party_uuids": [
