@@ -105,6 +105,11 @@ def generate_boot(platform):
                 "sync_endpoint": "https://timeline-sync.getpebble.com/v1/sync",
                 "sync_policy_minutes": 60
             },
+            "treasure_data": {
+# We'll turn this on for everyone tomorrow.
+#
+#                "endpoint": "https://treasure.rebble.io",
+            },
             "voice": {
                 "first_party_uuids": [
                     "3351e678-c9c3-4299-b573-47637aebe34a"
@@ -170,6 +175,10 @@ def generate_boot(platform):
                 "sync_endpoint":      f"{config['REBBLE_TIMELINE_URL']}/v1/sync",
                 "sync_policy_minutes": user.data.get('timeline_ttl', 3 * 60)
             }
+        
+        # A user can override with something like 'rebble.noident=True' or
+        # something, if they would like.
+        boot['config']['treasure_data']['write_key'] = f"rebble.user={user.data.get('uid')},rebble.subscribed={user.data.get('is_subscribed', False)}"
 
         if user.data.get('is_subscribed', False):
             boot['config']['weather'] = {
