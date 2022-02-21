@@ -255,7 +255,10 @@ def generate_boot(platform):
                         "appstore/watchapps": True,
                         "appstore/watchfaces": True
                     },
-                    "treasure_data": True
+                    "treasure_data": {
+                        "endpoint": True,
+                        "write_key": True,
+                    },
                 }
             }
             
