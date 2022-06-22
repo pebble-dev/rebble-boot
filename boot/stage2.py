@@ -219,6 +219,7 @@ def generate_boot(platform):
                     ('pl_PL', 'pol-POL'),
                     ('ro_RO', 'rom-ROM'),
                     ('ru_RU', 'rus-RUS'),
+                    ('uk_UA', 'ukr-UKR'),
                     ('es_ES', 'spa-ESP'),
                     ('es_MX', 'spa-XLA'),
                     ('es_US', 'spa-USA'),
