@@ -20,6 +20,7 @@ from flask_sslify import SSLify
 from .stage1 import init_app as init_stage1
 from .stage2 import init_app as init_stage2
 from .auth import rebble, init_app as init_auth
+from .cobble import init_app as init_cobble
 from .settings import config
 
 app = Flask(__name__)
@@ -34,6 +35,7 @@ if not app.debug:
 init_stage1(app)
 init_stage2(app)
 init_auth(app)
+init_cobble(app)
 
 # XXX: upstream this
 import beeline

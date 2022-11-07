@@ -23,4 +23,6 @@ config = {
     },
     'HONEYCOMB_KEY': environ.get('HONEYCOMB_KEY', None),
     'WS_PROXY_URL': environ.get('WS_PROXY_URL', f'ws://dev-ws-proxy.{domain_root}'),
+    'COBBLE_OAUTH_CLIENT_ID': environ['COBBLE_OAUTH_CLIENT_ID'],
+    'REBBLE_ACCOUNT_URL': environ.get('REBBLE_ACCOUNT_URL', f"{http_protocol}://auth.{domain_root}/account/"),
 }
