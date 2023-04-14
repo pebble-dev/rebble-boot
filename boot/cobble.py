@@ -13,7 +13,7 @@ def boot_cobble():
     boot = {
         "auth": {
             "base": f"{config['REBBLE_AUTH_URL']}/api",
-            "authorise_url": f"{config['REBBLE_AUTH_URL']}/oauth/authorise",
+            "authorize_url": f"{config['REBBLE_AUTH_URL']}/oauth/authorise",
             "refresh_url": f"{config['REBBLE_AUTH_URL']}/oauth/token",
             "client_id": config['COBBLE_OAUTH_CLIENT_ID']
         },
