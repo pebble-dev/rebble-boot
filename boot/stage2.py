@@ -233,6 +233,11 @@ def generate_boot(platform):
                     ('cmn-Hant-TW', 'man-TAI'),
                     ('cmn-Hans-CN', 'man-CHI'),
                 ]]
+                boot['config']['voice']['languages'].append({
+                    'endpoint': f"{asr_token}-auto-auto.{config['ASR_ROOT']}",
+                    'four_char_locale': 'Auto',
+                    'six_char_locale': 'ato-ATO'
+                })
 
         overrides = user.data.get('boot_overrides', None)
         if overrides and type(overrides) == dict:
