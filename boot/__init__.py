@@ -54,8 +54,8 @@ def index():
 
     platform = request.user_agent.platform
 
-    is_ios = platform in ('iphone', 'ipad')
-    is_android = (platform == 'android' or 'BB10' in request.user_agent.string)  # BB10 runs Pebble Android.
+    is_ios = (platform in ('iphone', 'ipad') or request.args.get('force_ua') == "ios")
+    is_android = (platform == 'android' or 'BB10' in request.user_agent.string or request.args.get('force_ua') == "android")  # BB10 runs Pebble Android.
     os_path = ''
     if is_ios:
         os = 'ios'
