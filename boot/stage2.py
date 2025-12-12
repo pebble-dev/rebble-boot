@@ -81,7 +81,7 @@ def generate_boot(platform):
                 "i18n/language_packs": f"{config['LANGUAGE_PACK_URL']}/v1/languages",
                 # "remote_device_analytics": "https://pb-collector.getpebble.com/analytics",
                 # "resources": "https://dev-portal.getpebble.com/api?platform=ios&jsv=200",
-                # "trending_searches": "https://pebble-trending-searches.s3-us-west-2.amazonaws.com/production/data.json?hardware=$$hardware$$&platform=ios",
+                "trending_searches": "https://storage.googleapis.com/rebble-search/trending_searches.json?hardware=$$hardware$$&platform=ios",
                 # "users/app_locker": f"https://dev-portal.getpebble.com/api/users/locker?platform={platform}&jsv=200",
                 "users/me": f"{config['APPSTORE_API_URL']}/api/v0/users/me?platform={platform}"
             },
