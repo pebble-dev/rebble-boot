@@ -7,8 +7,11 @@ except ImportError:
 import time
 import urllib.parse
 
+import os
+
 import beeline
 from beeline.patch import requests
+import beeline.propagation.w3c as w3c
 import requests
 
 from flask import Flask, session, redirect, url_for, render_template, request, send_from_directory
@@ -26,8 +29,13 @@ from .settings import config
 app = Flask(__name__)
 app.config.update(**config)
 if config['HONEYCOMB_KEY']:
-     beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot')
-     HoneyMiddleware(app, db_events = True)
+    # Only turn this on once EVERYTHING has migrated to the new
+    # rws_common version that supports W3C trace headers.
+    if os.environ.get('O11Y_SHOULD_USE_W3C_TRACE_HEADERS', False):
+        beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot', http_trace_propagation_hook=w3c.http_trace_propagation_hook)
+    else:
+        beeline.init(writekey=config['HONEYCOMB_KEY'], dataset='rws', service_name='boot')
+    HoneyMiddleware(app, db_events = True)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 sslify = SSLify(app, skips = ['heartbeat'])
 if not app.debug:
