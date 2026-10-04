@@ -20,6 +20,20 @@ def boot_cobble():
         "appstore": {
             "base": f"{config['APPSTORE_API_URL']}/api"
         },
+        "locker": {
+            "add_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$",
+            "get_endpoint": f"{config['APPSTORE_API_LOCKER_URL']}/api/v1/locker",
+            "remove_endpoint": f"{config['APPSTORE_API_URL']}/api/v1/locker/$$app_uuid$$"
+        },
+        "timeline": {
+            "pin_endpoint": f"{config['REBBLE_TIMELINE_URL']}/v1/user/pins/$$pin_id$$",
+            "pin_ttl_seconds": 259200,
+            "sandbox_user_token": f"{config['REBBLE_TIMELINE_URL']}/v1/tokens/sandbox/$$uuid$$",
+            "subscribe_to_topic": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions/$$topic_id$$",
+            "subscriptions_list": f"{config['REBBLE_TIMELINE_URL']}/v1/user/subscriptions",
+            "sync_endpoint": f"{config['REBBLE_TIMELINE_URL']}/v1/sync",
+            "sync_policy_minutes": 60
+        },
         "webviews": {
             "appstoreApplication": f"{config['APPSTORE_URL']}/{locale}/application/",
             "appstoreWatchapps": f"{config['APPSTORE_URL']}/{locale}/watchapps",
